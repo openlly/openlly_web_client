@@ -15,7 +15,7 @@ export function Toast({ message, type, onClose }: ToastProps) {
 
   return (
     <div 
-      className={`fixed bottom-4 right-4 flex items-center gap-2 px-4 py-3 rounded-lg shadow-lg 
+      className={`fixed top-4 right-4 flex items-center gap-2 px-4 py-3 rounded-lg shadow-lg 
         text-white animate-slide-up ${type === 'success' ? 'bg-green-500' : 'bg-red-500'}`}
     >
       {type === 'success' ? (

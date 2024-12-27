@@ -15,9 +15,10 @@ interface QuestionData {
   title: string;
   content: string;
   user: {
-    username: string;
-    profileImg: string;
     id: string;
+    username: string;
+    createdAt: string;
+    profileImg: string;
   };
   gradient?: string[];
 }
@@ -136,7 +137,6 @@ const LoadingState = () => {
   return (
     <div className="flex justify-center items-center min-h-screen text-white">
       <div className="spinner-border animate-spin inline-block w-24 h-24 border-4 rounded-full border-t-transparent border-solid" />
-      <p>Loading question...</p>
     </div>
   );
 };
@@ -187,6 +187,7 @@ function AnswerComponent({ questionData, handleSubmitAnswer }: QuestionCardProp)
             title={questionData.title}
             content={questionData.content}
             username={questionData.user.username}
+            profileImg={questionData.user.profileImg}
           />
           <AnswerForm onSubmit={handleSubmitAnswer} questionId={questionData.id} />
         </div>
