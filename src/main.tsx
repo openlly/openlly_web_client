@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/:u/:q" element={<AnswerPage />} />
-        <Route path= "/emailVerification/:token" element={<EmailVerificationPage />} />
+        <Route path= "/emailVerification/:token?email=:email" element={<EmailVerificationPage />} />
       </Routes>
     </Router>
   </StrictMode>

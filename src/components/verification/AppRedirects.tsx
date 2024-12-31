@@ -6,13 +6,14 @@ import { StoreButton } from './buttons/StoreButton';
 
 interface AppRedirectProps {
   token: string;
+  email: string
 }
 
-export function AppRedirect({ token }: AppRedirectProps) {
+export function AppRedirect({ token,email }: AppRedirectProps) {
   const [isAppInstalled, setIsAppInstalled] = useState<boolean | null>(null);
   const iosBundle = 'com.smkwinner.openlly.openlly';
   const androidBundle = 'com.smkwinner.openlly.client';
-  const appUrl = `openlly://auth?token=${token}`;
+  const appUrl = `openlly://auth?token=${token}?email=${email}`;
 
   useEffect(() => {
     const checkApp = async () => {
