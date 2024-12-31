@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { AnswerPage } from './pages/AnswerPage';
 import App from './App';
+import { EmailVerificationPage } from './pages/EmailVerification';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -11,6 +12,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/:u/:q" element={<AnswerPage />} />
+        <Route path= "/emailVerification/:token" element={<EmailVerificationPage />} />
       </Routes>
     </Router>
   </StrictMode>
