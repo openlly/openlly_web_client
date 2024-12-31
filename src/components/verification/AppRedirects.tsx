@@ -13,7 +13,7 @@ export function AppRedirect({ token,email }: AppRedirectProps) {
   const [isAppInstalled, setIsAppInstalled] = useState<boolean | null>(null);
   const iosBundle = 'com.smkwinner.openlly.openlly';
   const androidBundle = 'com.smkwinner.openlly.client';
-  const appUrl = `openlly://auth?token=${token}?email=${email}`;
+  const appUrl = `openlly://auth?token=${token}&email=${email}`;
 
   useEffect(() => {
     const checkApp = async () => {
