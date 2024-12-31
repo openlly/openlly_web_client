@@ -16,7 +16,7 @@ export function EmailVerificationPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#ee0979] to-[#ff6a00] flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        {isMobile && token ? (
+        {isMobile && token && email ? (
           <AppRedirect token={token} email={email} />
         ) : (
           <EarlyAccessContent />
