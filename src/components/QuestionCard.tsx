@@ -23,7 +23,7 @@ export function QuestionCard({ title, content, username, profileImg }: QuestionC
 
   return (
     <div 
-      className="p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-lg w-full animate-slide-up"
+      className="p-4 sm:p-6  backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-lg w-full animate-slide-up"
       style={{
         background: 'white'
       }}

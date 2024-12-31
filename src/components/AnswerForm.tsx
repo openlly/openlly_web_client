@@ -1,13 +1,24 @@
 import React, { useState, useRef } from 'react';
-import { Send, Dice1, Dice2, Dice3, Dice4, Dice5, Dice6 } from 'lucide-react';
+import { Eye, EyeOff,Send, Dice1, Dice2, Dice3, Dice4, Dice5, Dice6 } from 'lucide-react';
 import { gradientClasses } from '../utils/styles';
 
 import { getRandomSuggestion } from '../utils/suggestion';
 import {useDebouncer} from '../hooks/useDebouncer';
+import { HintField } from './HintTextField';
+import { AcknowledgmentField } from './AcknowledgmenForm';
+import { RevealFields } from './RevealTextField';
 
 interface AnswerFormProps {
   questionId: string;
-  onSubmit: (answer: string) => void;
+  onSubmit: (data: {
+    answer: string;
+    hint: string;
+    revealName: boolean;
+    name?: string;
+    revealTime?: string;
+    email?: string;
+    wantAcknowledgment?: boolean;
+  }) => void;
 }
 
 export function AnswerForm({ questionId, onSubmit }: AnswerFormProps) {
@@ -16,6 +27,12 @@ export function AnswerForm({ questionId, onSubmit }: AnswerFormProps) {
   const [scale, setScale] = useState(1);
   const timerRef = useRef<number | null>(null);
   const randomSuggestionLoading = useRef(false);
+  const [hint, setHint] = useState('');
+  const [revealName, setRevealName] = useState(false);
+  const [name, setName] = useState('');
+  const [revealTime, setRevealTime] = useState('');
+  const [email, setEmail] = useState('');
+  const [wantAcknowledgment, setWantAcknowledgment] = useState(false);
 
   const debouncedRandomSuggestion = useDebouncer(
     
@@ -39,10 +56,30 @@ export function AnswerForm({ questionId, onSubmit }: AnswerFormProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (answer.trim()) {
-      onSubmit(answer);
-      setAnswer('');
+      onSubmit({
+        answer,
+        hint,
+        revealName,
+        ...(revealName && {
+          name,
+          revealTime,
+          ...(wantAcknowledgment && { email, wantAcknowledgment })
+        })
+      });      
+      resetForm();
+       
     }
   };
+  function resetForm() {
+     // Reset form
+     setAnswer('');
+     setHint('');
+     setRevealName(false);
+     setName('');
+     setRevealTime('');
+     setEmail('');
+     setWantAcknowledgment(false);
+  }
 
   const handleRandomSuggestion = () => {
     if (timerRef.current) clearTimeout(timerRef.current);
@@ -62,7 +99,7 @@ export function AnswerForm({ questionId, onSubmit }: AnswerFormProps) {
 
   return (
     <div className="space-y-4">
-      <form onSubmit={handleSubmit} className="w-full animate-fade-in">
+      <form onSubmit={handleSubmit} className="w-full animate-fade-in ">
         <div className="relative">
           <textarea
             value={answer}
@@ -70,7 +107,7 @@ export function AnswerForm({ questionId, onSubmit }: AnswerFormProps) {
             placeholder="Type your anonymous answer..."
             className="w-full p-3 sm:p-4 pr-24 rounded-xl border border-gray-200 
               focus:border-[#ee0979] focus:ring-2 focus:ring-[#ee0979]/20 
-              transition-all resize-none text-sm sm:text-base
+              transition-all resize-none text-sm sm:text-base bg-white/80 backdrop-blur-sm
               h-24 sm:h-32"
           />
           <div className="absolute right-2 bottom-2 sm:right-3 sm:bottom-3 flex gap-2">
@@ -107,8 +144,50 @@ export function AnswerForm({ questionId, onSubmit }: AnswerFormProps) {
             >
               <Send size={18} className="sm:w-5 sm:h-5" />
             </button>
+           
+          </div>
+          
+
+        </div>
+        <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 space-y-4 shadow-lg">
+          <HintField 
+            value={hint}
+            onChange={setHint}
+          />
+
+          <AcknowledgmentField
+            email={email}
+            setEmail={setEmail}
+            wantAcknowledgment={wantAcknowledgment}
+            setWantAcknowledgment={setWantAcknowledgment}
+          />
+
+          <div className="space-y-3">
+            <button
+              type="button"
+              onClick={() => setRevealName(!revealName)}
+              className={`w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg
+                transition-all text-sm
+                ${revealName 
+                  ? `bg-gradient-to-br from-[#ee0979] to-[#ff6a00] text-white` 
+                  : `bg-gray-100 text-gray-600 hover:bg-gray-200`
+                }`}
+            >
+              {revealName ? <Eye size={16} /> : <EyeOff size={16} />}
+              {revealName ? 'Reveal my name' : 'Stay anonymous'}
+            </button>
+
+            {revealName && (
+              <RevealFields
+                name={name}
+                setName={setName}
+                revealTime={revealTime}
+                setRevealTime={setRevealTime}
+              />
+            )}
           </div>
         </div>
+       
       </form>
     </div>
   );

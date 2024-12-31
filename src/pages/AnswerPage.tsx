@@ -2,7 +2,6 @@ import { QuestionCard } from '../components/QuestionCard';
 import { AnswerForm } from '../components/AnswerForm';
 import { EarlyAccessBanner } from '../components/EarlyAccessBanner';
 import { Footer } from '../components/Footer';
-import { GRADIENTS } from '../utils/constants';
 import { useToast } from '../hooks/useToast';
 import { Toast } from '../components/Toast';
 import { useParams,useNavigate } from 'react-router-dom';
@@ -25,6 +24,7 @@ interface QuestionData {
 
 // AnswerPage Component
 import { useRef } from 'react';
+import { GradientBackground } from '../components/GradientBackground';
 
 export function AnswerPage() {
   const { u, q } = useParams<{ u: string; q: string }>();
@@ -67,13 +67,21 @@ export function AnswerPage() {
     fetchQuestionData();
   }, [u, q]); // Only triggers on param changes
 
-  const handleSubmitAnswer = (answer: string) => {
+  const handleSubmitAnswer = (req: {
+    answer: string;
+    hint: string;
+    revealName: boolean;
+    name?: string;
+    revealTime?: string;
+    email?: string;
+    wantAcknowledgment?: boolean;
+  }) => {
     try {
      const endpoint="/answer/create";
      const baseUrl = import.meta.env.VITE_API_BASE_URL;
      const url = `${baseUrl}${endpoint}`;
      const data= {
-        content: answer,
+        content: req.answer,
         questionId: questionData?.id,
         answerTo: questionData?.user.id,
      };
@@ -104,12 +112,12 @@ export function AnswerPage() {
   };
 
   return (
-    <div
-      className="min-h-screen"
-      style={{
+    <GradientBackground>
+     
+      {/* style={{
         background: `linear-gradient(135deg, ${GRADIENTS.primary.from}, ${GRADIENTS.primary.to})`,
-      }}
-    >
+      }} */}
+    
       {loading ? (
         <LoadingState />
       ) : error ? (
@@ -127,7 +135,7 @@ export function AnswerPage() {
         <Toast message={toast.message} type={toast.type} onClose={hideToast} />
       )}
       <Footer />
-    </div>
+    </GradientBackground>
   );
 }
 
@@ -167,7 +175,15 @@ const ErrorState = () => {
 // AnswerComponent (For Question and Answer Form)
 interface QuestionCardProp {
   questionData: QuestionData;
-  handleSubmitAnswer: (answer: string) => void;
+  handleSubmitAnswer: (data: {
+    answer: string;
+    hint: string;
+    revealName: boolean;
+    name?: string;
+    revealTime?: string;
+    email?: string;
+    wantAcknowledgment?: boolean;
+  }) => void;
 }
 
 function AnswerComponent({ questionData, handleSubmitAnswer }: QuestionCardProp) {

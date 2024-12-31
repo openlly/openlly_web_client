@@ -9,7 +9,7 @@ export function EarlyAccessBanner() {
   return (
     <div 
       onClick={handleEarlyAccess}
-      className={`bg-white p-4 rounded-lg mb-6 text-black 
+      className={`bg-white/80 backdrop-blur-sm p-4 rounded-lg mb-6 text-black  
         flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 
         cursor-pointer hover:opacity-90 transition-opacity animate-fade-in`}
     >
