@@ -41,22 +41,15 @@ export function AnswerPage() {
 
     const fetchQuestionData = async () => {
       try {
-        console.log('Fetching question data...');
         setLoading(true);
 
         const baseUrl = import.meta.env.VITE_API_BASE_URL;
         const url = `${baseUrl}/question/getQuestionDetails?q=${q}&u=${u}`;
-        console.log('API URL:', url);
-
         const response = await fetch(url);
         if (!response.ok) throw new Error('Failed to load question data');
-
         const data = await response.json();
-        console.log('Fetched data:', data);
-
         setQuestionData(data.data);
       } catch (error: any) {
-        console.error('Error:', error.message);
         setError(error.message);
         showToast(`Failed to load question data. ${error.message}`, 'error');
       } finally {
@@ -98,12 +91,10 @@ export function AnswerPage() {
           }
           return response.json();
         })
-        .then((data) => {
-          console.log('Answer submitted successfully:', data);
+        .then((_) => {
           showToast('Answer submitted successfully', 'success');
         })
         .catch((error) => {
-          console.error('Failed to submit answer:', error);
           showToast(`Failed to submit answer. Please try again. ${error}`, 'error');
         });
     } catch (error) {

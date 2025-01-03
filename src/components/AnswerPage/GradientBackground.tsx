@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import * as THREE from 'three';
+import { useEffect, useRef } from 'react';
+import { Scene, OrthographicCamera, WebGLRenderer, ShaderMaterial, Color, PlaneGeometry, Mesh } from 'three'; // Import only required parts of THREE
 import { vertexShader, fragmentShader } from '../../shaders/background';
 import { GRADIENTS } from '../../utils/constants';
 
@@ -9,93 +9,108 @@ interface GradientBackgroundProps {
 
 export function GradientBackground({ children }: GradientBackgroundProps) {
   const mountRef = useRef<HTMLDivElement>(null);
-  const sceneRef = useRef<THREE.Scene | null>(null);
-  const cameraRef = useRef<THREE.OrthographicCamera | null>(null);
-  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
-  const materialRef = useRef<THREE.ShaderMaterial | null>(null);
+  const sceneRef = useRef<Scene>();
+  const cameraRef = useRef<OrthographicCamera>();
+  const rendererRef = useRef<WebGLRenderer>();
+  const materialRef = useRef<ShaderMaterial>();
+  const animationFrameIdRef = useRef<number>();
 
   useEffect(() => {
     if (!mountRef.current) return;
 
-    // Setup
-    sceneRef.current = new THREE.Scene();
-    cameraRef.current = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
-    cameraRef.current.position.z = 1;
+    // Setup Scene, Camera, Renderer
+    const scene = new Scene();
+    const camera = new OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
+    camera.position.z = 1;
+    const renderer = new WebGLRenderer({ alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
 
-    rendererRef.current = new THREE.WebGLRenderer({ alpha: true });
-    rendererRef.current.setSize(window.innerWidth, window.innerHeight);
-    rendererRef.current.setPixelRatio(window.devicePixelRatio);
-    mountRef.current.appendChild(rendererRef.current.domElement);
+    // Append renderer to DOM
+    mountRef.current.appendChild(renderer.domElement);
 
-    // Material
-    materialRef.current = new THREE.ShaderMaterial({
+    // Create Shader Material
+    const material = new ShaderMaterial({
       uniforms: {
         uTime: { value: 0 },
-        uColor1: { value: new THREE.Color(GRADIENTS.primary.from) },
-        uColor2: { value: new THREE.Color(GRADIENTS.primary.to) },
+        uColor1: { value: new Color(GRADIENTS.primary.from) },
+        uColor2: { value: new Color(GRADIENTS.primary.to) },
       },
       vertexShader,
       fragmentShader,
       transparent: true,
     });
 
-    // Mesh
-    const geometry = new THREE.PlaneGeometry(2, 2);
-    const mesh = new THREE.Mesh(geometry, materialRef.current);
-    sceneRef.current.add(mesh);
+    // Create Geometry and Mesh
+    const geometry = new PlaneGeometry(2, 2);
+    const mesh = new Mesh(geometry, material);
+    scene.add(mesh);
 
-    // Animation
+    // Store references
+    sceneRef.current = scene;
+    cameraRef.current = camera;
+    rendererRef.current = renderer;
+    materialRef.current = material;
+
+    // Animation Loop
     const animate = () => {
-      if (!materialRef.current || !rendererRef.current || !sceneRef.current || !cameraRef.current) return;
+      if (!material || !renderer || !scene || !camera) return;
 
-      materialRef.current.uniforms.uTime.value += 0.01;
-      rendererRef.current.render(sceneRef.current, cameraRef.current);
-      requestAnimationFrame(animate);
+      material.uniforms.uTime.value += 0.01;
+      renderer.render(scene, camera);
+      animationFrameIdRef.current = requestAnimationFrame(animate);
     };
 
     animate();
 
-    // Resize handler
+    // Handle Resize
     const handleResize = () => {
-      if (!rendererRef.current || !cameraRef.current) return;
+      if (!renderer || !camera) return;
 
-      rendererRef.current.setSize(window.innerWidth, window.innerHeight);
+      renderer.setSize(window.innerWidth, window.innerHeight);
       const aspect = window.innerWidth / window.innerHeight;
 
       if (aspect > 1) {
-        cameraRef.current.left = -aspect;
-        cameraRef.current.right = aspect;
-        cameraRef.current.top = 1;
-        cameraRef.current.bottom = -1;
+        camera.left = -aspect;
+        camera.right = aspect;
+        camera.top = 1;
+        camera.bottom = -1;
       } else {
-        cameraRef.current.left = -1;
-        cameraRef.current.right = 1;
-        cameraRef.current.top = 1 / aspect;
-        cameraRef.current.bottom = -1 / aspect;
+        camera.left = -1;
+        camera.right = 1;
+        camera.top = 1 / aspect;
+        camera.bottom = -1 / aspect;
       }
 
-      cameraRef.current.updateProjectionMatrix();
+      camera.updateProjectionMatrix();
     };
 
-    window.addEventListener('resize', handleResize);
+    // Debounce Resize Handling
+    const debouncedResize = (() => {
+      let resizeTimeout: ReturnType<typeof setTimeout>;
+      return () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(handleResize, 100);
+      };
+    })();
+
+    window.addEventListener('resize', debouncedResize);
     handleResize();
 
     // Cleanup
     return () => {
-      window.removeEventListener('resize', handleResize);
-      
-      if (rendererRef.current && mountRef.current) {
-        mountRef.current.removeChild(rendererRef.current.domElement);
-        rendererRef.current.dispose();
+      window.removeEventListener('resize', debouncedResize);
+
+      if (animationFrameIdRef.current) cancelAnimationFrame(animationFrameIdRef.current);
+
+      if (renderer && mountRef.current) {
+        mountRef.current.removeChild(renderer.domElement);
+        renderer.dispose();
       }
 
-      if (materialRef.current) {
-        materialRef.current.dispose();
-      }
-
-      if (sceneRef.current) {
-        sceneRef.current.clear();
-      }
+      material?.dispose();
+      geometry.dispose();
+      scene.clear();
     };
   }, []);
 

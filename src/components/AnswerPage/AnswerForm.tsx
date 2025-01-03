@@ -44,7 +44,7 @@ export function AnswerForm({ questionId, onSubmit }: AnswerFormProps) {
         setShowRandomDice(true);
         setTimeout(() => setShowRandomDice(false), 500);
       } catch (error) {
-        console.log(error);
+        //ignore
       } finally {
         randomSuggestionLoading.current = false;
       }
