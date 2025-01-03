@@ -1,5 +1,5 @@
 import { ChevronRight } from 'lucide-react';
-import { links } from '../utils/constants';
+import { links } from '../../utils/constants';
 
 export function EarlyAccessBanner() {
   const handleEarlyAccess = () => {

@@ -1,9 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { Eye, EyeOff,Send, Dice1, Dice2, Dice3, Dice4, Dice5, Dice6 } from 'lucide-react';
-import { gradientClasses } from '../utils/styles';
-
-import { getRandomSuggestion } from '../utils/suggestion';
-import {useDebouncer} from '../hooks/useDebouncer';
+import { useDebouncer } from '../../hooks/useDebouncer';
+import { getRandomSuggestion } from '../../utils/suggestion';
+import { gradientClasses } from '../../utils/styles';
 import { HintField } from './HintTextField';
 import { AcknowledgmentField } from './AcknowledgmenForm';
 import { RevealFields } from './RevealTextField';

@@ -2,9 +2,9 @@
 
 import { useParams } from 'react-router-dom';
 
-import { EarlyAccessContent } from '../components/verification/EarlyAccessContent.tsx';
+import { EarlyAccessContent } from '../components/EmailVerification/EarlyAccessContent.tsx';
 import { isMobileDevice } from '../utils/plateform';
-import { AppRedirect } from '../components/verification/AppRedirects';
+import { AppRedirect } from '../components/EmailVerification/AppRedirects.tsx';
 
 export function EmailVerificationPage() {
   const { token } = useParams<{ token: string }>();
@@ -19,7 +19,12 @@ export function EmailVerificationPage() {
         {isMobile && token && email ? (
           <AppRedirect token={token} email={email} />
         ) : (
-          <EarlyAccessContent />
+         <div>
+                  <EarlyAccessContent />
+         </div>
+  
+
+          
         )}
       </div>
     </div>

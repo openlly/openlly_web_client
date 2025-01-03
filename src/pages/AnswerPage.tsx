@@ -1,7 +1,5 @@
-import { QuestionCard } from '../components/QuestionCard';
-import { AnswerForm } from '../components/AnswerForm';
-import { EarlyAccessBanner } from '../components/EarlyAccessBanner';
-import { Footer } from '../components/Footer';
+import { QuestionCard } from '../components/AnswerPage/QuestionCard';
+
 import { useToast } from '../hooks/useToast';
 import { Toast } from '../components/Toast';
 import { useParams,useNavigate } from 'react-router-dom';
@@ -24,7 +22,9 @@ interface QuestionData {
 
 // AnswerPage Component
 import { useRef } from 'react';
-import { GradientBackground } from '../components/GradientBackground';
+import { GradientBackground } from '../components/AnswerPage/GradientBackground';
+import { EarlyAccessBanner } from '../components/AnswerPage/EarlyAccessBanner';
+import { AnswerForm } from '../components/AnswerPage/AnswerForm';
 
 export function AnswerPage() {
   const { u, q } = useParams<{ u: string; q: string }>();
@@ -134,7 +134,6 @@ export function AnswerPage() {
       {toast.isVisible && (
         <Toast message={toast.message} type={toast.type} onClose={hideToast} />
       )}
-      <Footer />
     </GradientBackground>
   );
 }

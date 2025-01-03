@@ -1,5 +1,5 @@
 import { Mail, Info } from 'lucide-react';
-import { Tooltip } from './Tooltip';
+import { Tooltip } from '../Tooltip';
 
 interface AcknowledgmentFieldProps {
   email: string;

@@ -1,5 +1,5 @@
 import { HelpCircle, Lightbulb } from 'lucide-react';
-import { Tooltip } from './Tooltip';
+import { Tooltip } from '../Tooltip';
 
 interface HintFieldProps {
   value: string;

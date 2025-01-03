@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
-import { vertexShader, fragmentShader } from '../shaders/background';
-import { GRADIENTS } from '../utils/constants';
+import { vertexShader, fragmentShader } from '../../shaders/background';
+import { GRADIENTS } from '../../utils/constants';
 
 interface GradientBackgroundProps {
   children: React.ReactNode;

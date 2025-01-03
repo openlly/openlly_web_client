@@ -1,5 +1,5 @@
 import { Clock, User, Info } from 'lucide-react';
-import { Tooltip } from './Tooltip';
+import { Tooltip } from '../Tooltip';
 
 
 interface RevealFieldsProps {
