@@ -69,34 +69,77 @@ export function AnswerPage() {
     email?: string;
     wantAcknowledgment?: boolean;
   }) => {
+    // Client-side validations
+    if (!req.answer || req.answer.trim().length === 0) {
+      showToast('Answer cannot be empty', 'error');
+      return;
+    }
+
+    if (req.wantAcknowledgment && (!req.email || !/\S+@\S+\.\S+/.test(req.email))) {
+      showToast('Please provide a valid email for acknowledgment', 'error');
+      return;
+    }
+
+    if (req.revealName && (!req.name || req.name.trim().length === 0)) {
+      showToast('Name cannot be empty if you choose to reveal it', 'error');
+      return;
+    }
+
+    if (req.revealName && (!req.revealTime || req.revealTime.trim().length === 0)) {
+      //time diff should be in range (min 2 hr) and (max 48 hr)
+       const timeformated = new Date(req.revealTime!).getTime();
+        const currentTime = new Date().getTime();
+        const diff = timeformated - currentTime;
+        const diffInHours = diff / (1000 * 60 * 60);
+        if (diffInHours < 2 || diffInHours > 48) {
+          showToast('Reveal time should be between 2 and 48 hours', 'error');
+          return;
+        }
+      return;
+    }
+
     try {
-     const endpoint="/answer/create";
-     const baseUrl = import.meta.env.VITE_API_BASE_URL;
-     const url = `${baseUrl}${endpoint}`;
-     const data= {
-        content: req.answer,
-        questionId: questionData?.id,
-        answerTo: questionData?.user.id,
-     };
-     fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
+      const endpoint = "/answer/create";
+      const baseUrl = import.meta.env.VITE_API_BASE_URL;
+      const url = `${baseUrl}${endpoint}`;
+      let data = new Map<string, any>([
+      ['content', req.answer],
+      ['questionId', questionData?.id],
+      ['answerTo', questionData?.user.id],
+      ]);
+
+      if (req.hint) {
+      data.set('hint', req.hint);
+      }
+
+      if (req.wantAcknowledgment && req.email) {
+      data.set('notifEmail', req.email);
+      }
+
+      if (req.revealName && req.name && req.name.length > 0 && req.revealTime && req.revealTime.length > 0) {
+      data.set('userIdentity', req.name);
+      data.set('revealTime', req.revealTime);
+      }
+
+      fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(Object.fromEntries(data)),
       })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Failed to submit answer');
-          }
-          return response.json();
-        })
-        .then((_) => {
-          showToast('Answer submitted successfully', 'success');
-        })
-        .catch((error) => {
-          showToast(`Failed to submit answer. Please try again. ${error}`, 'error');
-        });
+      .then((response) => {
+        if (!response.ok) {
+        throw new Error('Failed to submit answer');
+        }
+        return response.json();
+      })
+      .then((_) => {
+        showToast('Answer submitted successfully', 'success');
+      })
+      .catch((error) => {
+        showToast(`Failed to submit answer. Please try again. ${error}`, 'error');
+      });
     } catch (error) {
       showToast(`Failed to submit answer. Please try again. ${error}`, 'error');
     }
