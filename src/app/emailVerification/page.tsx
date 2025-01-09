@@ -2,10 +2,19 @@
 
 import { EarlyAccessContent } from '../components/EmailVerification/EarlyAccessContent';
 import { AppRedirect } from '../components/EmailVerification/AppRedirects';
+import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { isMobileDevice } from '../utils/plateform';
 
 export default function EmailVerificationPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <EmailVerificationPageContent />
+    </Suspense>
+  );
+}
+
+function EmailVerificationPageContent() {
   const searchParams = useSearchParams();
   const token = searchParams.get('token') || '';
   const email = searchParams.get('email') || '';

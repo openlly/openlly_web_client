@@ -19,11 +19,10 @@ export function AppRedirect({ token,email }: AppRedirectProps) {
     const checkApp = async () => {
       const installed = await checkAppInstalled(iosBundle, androidBundle);
       setIsAppInstalled(installed);
-      
       if (installed) {
         window.location.href = appUrl;
       }
-    };``
+    };
 
     checkApp();
   }, [token, appUrl]);
@@ -49,10 +48,9 @@ export function AppRedirect({ token,email }: AppRedirectProps) {
       <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg inline-block">
         <Smartphone className="w-12 h-12 text-white" />
       </div>
-      
       <div className="space-y-2">
         <h2 className="text-xl font-semibold text-white">
-          {isAppInstalled ? 'Opening Openlly App...' : 'Get the Openlly App'}
+          {isAppInstalled ? 'Opening Openlly App...' : `Get the Openlly App`}
         </h2>
         {isAppInstalled && (
           <p className="text-white/80 text-sm">

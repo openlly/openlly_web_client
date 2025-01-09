@@ -2,6 +2,7 @@
 
 import { Layout } from "@/app/components/Layout";
 import { appConfig } from "@/app/utils/constants";
+import Link from "next/link";
 
 
 export default function Terms() {
@@ -42,7 +43,7 @@ export default function Terms() {
               <li><strong>Device information:</strong> To optimize the performance of Openlly, we collect information about the device you use to access the Service, such as device type, operating system, and browser version.</li>
               <li><strong>Content and interactions:</strong> We collect the content you submit to the platform (questions, answers) and your interactions with other users to improve the Service and provide personalized experiences.</li>
             </ul>
-            <p>For more details on how we process your data, please refer to our <a href="/privacy" className="text-blue-600">Privacy Policy</a>.</p>
+            <p>For more details on how we process your data, please refer to our <Link href="/privacy" className="text-blue-600">Privacy Policy</Link>.</p>
           </section>
 
           <section>
@@ -100,7 +101,7 @@ export default function Terms() {
             <h2 className="text-xl font-semibold mb-3">10. Contact Us</h2>
             <p>If you have any questions about these Terms of Service, please contact us at:</p>
             <ul className="list-disc pl-5 space-y-2 pt-2">
-              <li>Email: <a href={`mailto:${supportEmail}`} className="text-blue-600">{supportEmail}</a></li>
+              <li>Email: <Link href={`mailto:${supportEmail}`} className="text-blue-600">{supportEmail}</Link></li>
               <li>Address: {address}</li>
             </ul>
           </section>
