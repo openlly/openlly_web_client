@@ -51,14 +51,11 @@ export function AnswerComponent({ questionData, handleSubmitAnswer,onRandomSugge
       email?: string;
       wantAcknowledgment?: boolean;
     }) => {
-      console.log("submitting", data);
       const validationErrors = validateFormData(data);
-  
       if (validationErrors.length > 0) {
         showToast(validationErrors.join(" "), "error");
         return;
       }
-  
       // Ensure the object has the correct structure, using type assertions
       const formData: {
         answer: string;

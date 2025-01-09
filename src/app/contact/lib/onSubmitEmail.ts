@@ -12,18 +12,15 @@ export async function onSubmitContactDetails(data: ContactFormProps): Promise<bo
         },
         body: JSON.stringify(data),
       });
-
       if (!response.ok) {
         throw new Error("Failed to submit contact form");
-      } 
-
+      }
       let responseData: APIResponse;
       try {
         responseData = await response.json();
         return responseData.success;
       } catch (parseError) {
-        console.log('Error parsing JSON:', parseError);
-        return false;
+        throw new Error("Error parsing JSON: " + parseError);
       }
     } catch (error) {
       console.error("Error submitting contact form:", error);
