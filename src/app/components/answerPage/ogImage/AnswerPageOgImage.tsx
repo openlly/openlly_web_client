@@ -26,8 +26,8 @@ const EnhancedBrandedCTASection: React.FC<{ questionData?: QuestionData }> = ({ 
     <div style={{ 
       display: 'flex', 
       flexDirection: 'column', 
-      width: '1200px', 
-      height: '630px', 
+      width: 1920, 
+      height: 1080, 
       background: `linear-gradient(to right, ${gradientColors[0]}, ${gradientColors[1]})`,
       color: 'white',
       fontFamily: 'Arial, sans-serif',

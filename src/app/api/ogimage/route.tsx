@@ -33,20 +33,16 @@ export async function GET(request: NextRequest) {
               <BrandedCTASection questionData={questionData || undefined} /> // Handle undefined gracefully
             ),
             {
-              width: 1200,
-              height: 630,
+              width: 1920,
+              height: 1080,
             }
 );
         }
-       
-
-
-       
       } else {
         // Return a default image if username or question are missing
         return new ImageResponse(
           <h1>Question or username missing</h1>, 
-          { width: 1200, height: 630 }
+          { width: 1920, height: 1080 }
         );
       }
     }
@@ -54,7 +50,7 @@ export async function GET(request: NextRequest) {
     // Default fallback if type is specified or some other issue
     return new ImageResponse(
       <h1>Not Found</h1>,
-      { width: 1200, height: 630 }
+      { width: 1920, height: 1080 }
     );
 
   } catch (e) {
