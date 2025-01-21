@@ -1,4 +1,4 @@
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Smartphone } from 'lucide-react';
 import { checkAppInstalled, isIOS, isMobileDevice } from '../../utils/plateform';
 import { AppButton } from './buttons/AppButton';
@@ -9,7 +9,7 @@ interface AppRedirectProps {
   email: string
 }
 
-export function AppRedirect({ token,email }: AppRedirectProps) {
+export function AppRedirect({ token, email }: AppRedirectProps) {
   const [isAppInstalled, setIsAppInstalled] = useState<boolean | null>(null);
   const iosBundle = 'com.smkwinner.openlly.openlly';
   const androidBundle = 'com.smkwinner.openlly.client';
@@ -39,7 +39,7 @@ export function AppRedirect({ token,email }: AppRedirectProps) {
     );
   }
 
-  const storeUrl = isIOS() 
+  const storeUrl = isIOS()
     ? 'https://apps.apple.com/app/your-ios-app-id'
     : 'https://play.google.com/store/apps/details?id=com.smkwinner.openlly.client';
 
@@ -61,7 +61,7 @@ export function AppRedirect({ token,email }: AppRedirectProps) {
 
       <div className="space-y-3">
         {isMobileDevice() && (
-          <AppButton 
+          <AppButton
             onClick={handleOpenApp}
             label="Open App"
           />

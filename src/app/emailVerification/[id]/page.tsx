@@ -3,21 +3,34 @@
 import { EarlyAccessContent } from '../../components/EmailVerification/EarlyAccessContent';
 import { AppRedirect } from '../../components/EmailVerification/AppRedirects';
 import { Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
 import { isMobileDevice } from '../../utils/plateform';
 
-export default function EmailVerificationPage() {
+interface PageProps {
+  params: Promise<{
+    id: string;
+  }>;
+}
+
+export default async function EmailVerificationPage({ params }: PageProps) {
+  const { id } = await params;
+  const searchParams = new URLSearchParams(window.location.search);
+  const email = searchParams.get('email');
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <EmailVerificationPageContent />
+      <EmailVerificationPageContent params={{ token: id, email: email || '' }} />
     </Suspense>
   );
 }
 
-function EmailVerificationPageContent() {
-  const searchParams = useSearchParams();
-  const token = searchParams.get('token') || '';
-  const email = searchParams.get('email') || '';
+interface EmailVerificationPageProps {
+  params: {
+    token: string;
+    email: string;
+  };
+}
+
+function EmailVerificationPageContent({ params }: EmailVerificationPageProps) {
+  const { token, email } = params;
 
   const isMobile = isMobileDevice();
 
