@@ -1,10 +1,10 @@
 "use client";
 
-import { EarlyAccessContent } from '../components/EmailVerification/EarlyAccessContent';
-import { AppRedirect } from '../components/EmailVerification/AppRedirects';
+import { EarlyAccessContent } from '../../components/EmailVerification/EarlyAccessContent';
+import { AppRedirect } from '../../components/EmailVerification/AppRedirects';
 import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { isMobileDevice } from '../utils/plateform';
+import { isMobileDevice } from '../../utils/plateform';
 
 export default function EmailVerificationPage() {
   return (

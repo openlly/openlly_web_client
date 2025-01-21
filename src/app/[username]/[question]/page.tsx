@@ -24,14 +24,11 @@ export async function generateMetadata({ params }: PageProps) {
   const defaultDescription = "Share your questions anonymously and receive answers from your followers.";
 
   const title = `${questionData?.title??"NA"} - Ask by @${questionData?.user.username??"NA"} | Openlly`;
-  const description =
-    questionData?.content?.slice(0, 150) || defaultDescription;
-  
+  const description = questionData?.content?.slice(0, 150) || defaultDescription;
 
   // Use gradient or user profile image as a visual enhancement
   const gradientImage = `${appConfig.CLIENT_BASE_URL}/api/ogimage?t=q&q=${question}&u=${username}`
   const url = `${appConfig.CLIENT_BASE_URL}/${username}/${question}`;
-  
   return {
     title: title || defaultTitle,
     description: description,
@@ -69,13 +66,13 @@ export default async function AnswerPage({ params }: PageProps) {
   const questionData = await getQuestionDetails(username, question); // Assuming this is a function that fetches the data
 
   return (
-     <GradientBackground>
+    <GradientBackground>
       <Suspense fallback={<LoadingState />}>
         {questionData ? (
-          <AnswerComponent 
-            questionData={questionData} 
-            handleSubmitAnswer={submitAnswer} 
-            onRandomSuggestion={onRequestQuestionSuggestion} 
+          <AnswerComponent
+            questionData={questionData}
+            handleSubmitAnswer={submitAnswer}
+            onRandomSuggestion={onRequestQuestionSuggestion}
           />
         ) : (
           <ErrorState />

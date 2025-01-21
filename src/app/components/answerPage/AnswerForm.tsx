@@ -4,7 +4,7 @@ import { Eye, EyeOff,Send, Dice1, Dice2, Dice3, Dice4, Dice5, Dice6 } from 'luci
 import { useDebouncer } from '../../hooks/useDebouncer';
 import { gradientClasses } from '../../utils/styles';
 import { HintField } from './HintTextField';
-import { AcknowledgmentField } from './AcknowledgmenForm';
+import { AcknowledgmentField } from './AcknowledgmentForm';
 import { RevealFields } from './RevealTextField';
 
 interface AnswerFormProps {
