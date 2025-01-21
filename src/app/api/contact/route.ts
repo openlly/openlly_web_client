@@ -1,4 +1,3 @@
-import { APIResponse } from "@/app/types";
 import { appConfig } from "@/app/utils/constants";
 import { NextRequest, NextResponse } from "next/server";
 

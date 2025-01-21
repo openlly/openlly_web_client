@@ -1,5 +1,5 @@
 "use server";
-import { AnswerFormData, APIResponse } from "@/app/types";
+import { AnswerFormData } from "@/app/types";
 import { appConfig } from "@/app/utils/constants";
 
 export async function submitAnswer(data: AnswerFormData): Promise<boolean> {
@@ -16,6 +16,7 @@ export async function submitAnswer(data: AnswerFormData): Promise<boolean> {
     const { success } = await response.json();
     return success;
   } catch (e) {
+    console.error(e);
     return false;
   }
 }
