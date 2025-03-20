@@ -4,7 +4,6 @@ import { EarlyAccessContent } from '../../components/EmailVerification/EarlyAcce
 import { AppRedirect } from '../../components/EmailVerification/AppRedirects';
 import { Suspense } from 'react';
 import { isMobileDevice } from '../../utils/plateform';
-
 interface PageProps {
   params: Promise<{
     id: string;

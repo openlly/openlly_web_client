@@ -3,8 +3,6 @@
 import { Layout } from "@/app/components/Layout";
 import { appConfig } from "@/app/utils/constants";
 import Link from "next/link";
-
-
 export default function Terms() {
   const supportEmail = appConfig.CONTACT_EMAIL_ADDRESS;
   const address = appConfig.CONTACT_ADDRESS;

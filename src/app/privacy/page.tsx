@@ -1,7 +1,6 @@
 "use client";
 import { Layout } from '../components/Layout';
 import { appConfig } from '../utils/constants';
-
 export default function PrivacyPolicy() {
     const email = appConfig.CONTACT_EMAIL_ADDRESS
     const address =appConfig.CONTACT_ADDRESS
@@ -9,7 +8,6 @@ export default function PrivacyPolicy() {
     <Layout>
       <div className="max-w-3xl mx-auto px-4 py-12">
         <h1 className="text-3xl font-bold mb-8">Privacy Policy</h1>
-
         <div className="space-y-6">
           <section>
             <h2 className="text-xl font-semibold mb-3">Information We Collect</h2>

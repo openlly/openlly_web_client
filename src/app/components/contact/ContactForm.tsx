@@ -7,13 +7,15 @@ interface Props {
   onSubmit: (data: ContactFormProps) => Promise<boolean>; // Passed from the server
 }
 
+type QueryStatus = "idle" | "loading" | "success" | "error";
+
 export function ContactForm({ onSubmit }: Props) {
   const [formData, setFormData] = useState<ContactFormProps>({
     name: "",
     email: "",
     message: "",
   });
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [status, setStatus] = useState<QueryStatus>("idle");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent) => {
