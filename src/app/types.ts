@@ -13,13 +13,13 @@ export interface QuestionData {
   }
   
   export interface AnswerFormData {
-    answer: string;
+    content: string;
+    questionId: string;
+    answerTo: string;
     hint?: string;
-    revealName: boolean;
-    name?: string;
-    revealTime?: string;
-    email?: string;
-    wantAcknowledgment?: boolean;
+    notifEmail?: string | null;
+    userIdentity?: string | null;
+    revealTime?: string | null;
   }
 
 export interface APIResponse {

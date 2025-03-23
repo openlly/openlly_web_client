@@ -9,6 +9,7 @@ export async function submitAnswer(data: AnswerFormData): Promise<boolean> {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
+    console.log(response);
 
     if (!response.ok) {
       return false;

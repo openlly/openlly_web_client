@@ -4,14 +4,14 @@ import { Suspense, useCallback } from "react";
 import { AnswerForm } from "./AnswerForm";
 import { EarlyAccessBanner } from "./EarlyAccessBanner";
 import { QuestionCard } from "./QuestionCard";
-import { QuestionData } from "@/app/types";
+import { AnswerFormData, QuestionData } from "@/app/types";
 import { useToast } from "@/app/hooks/useToast";
 import { Toast } from "../Toast";
 
 interface AnswerComponentProps {
   questionData: QuestionData;
   onRandomSuggestion: (questionId: string) => Promise<string | null>;
-  handleSubmitAnswer: (data: { answer: string; hint?: string; revealName: boolean; name?: string; revealTime?: string; email?: string; wantAcknowledgment?: boolean }) => Promise<boolean>;
+  handleSubmitAnswer: (data: AnswerFormData) => Promise<boolean>;
 }
 
 export function AnswerComponent({ questionData, handleSubmitAnswer,onRandomSuggestion }: AnswerComponentProps) {
@@ -81,7 +81,15 @@ export function AnswerComponent({ questionData, handleSubmitAnswer,onRandomSugge
         formData.revealTime = data.revealTime;
       }
       // Pass the correctly shaped object to handleSubmitAnswer
-      const success = await handleSubmitAnswer(formData);
+      const success = await handleSubmitAnswer({
+        content: formData.answer,
+        hint: formData.hint,
+        notifEmail: formData.email,
+        userIdentity: formData.name,
+        revealTime: formData.revealTime,
+        questionId: formData.questionId,
+        answerTo: formData.answerTo,
+      });
       if (success) {
         showToast("Your message has been submitted successfully.", "success");
       } else {
