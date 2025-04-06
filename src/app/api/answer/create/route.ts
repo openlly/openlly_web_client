@@ -7,7 +7,14 @@ export async function POST(request: NextRequest) {
   
   try {
     // Check if body is JSON and parse it
-    const body = await request.json();
+    var body = await request.json();
+    //remove empty fields from body
+    Object.keys(body).forEach(key => {
+      if (body[key] === null || body[key] === undefined || body[key] === "") {
+        delete body[key];
+      }
+    });
+   
 
     // Make POST request to "/api/answer/create"
     const apiResult = await fetch(`${appConfig.API_BASE_URL}/answer/create`, {

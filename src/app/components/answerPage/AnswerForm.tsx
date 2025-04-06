@@ -165,7 +165,7 @@ export function AnswerForm({ questionId, onSubmit, onRandomSuggestion }: AnswerF
           />
 
           <div className="space-y-3">
-            <button
+            {/* <button
               type="button"
               onClick={() => setRevealName(!revealName)}
               className={`w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg
@@ -177,7 +177,7 @@ export function AnswerForm({ questionId, onSubmit, onRandomSuggestion }: AnswerF
             >
               {revealName ? <Eye size={16} /> : <EyeOff size={16} />}
               {revealName ? 'Reveal my name' : 'Stay anonymous'}
-            </button>
+            </button> */}
 
             {revealName && (
               <RevealFields

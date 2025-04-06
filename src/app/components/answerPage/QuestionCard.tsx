@@ -4,8 +4,6 @@ import { User, X } from 'lucide-react';
 import { useState } from 'react';
 import Image from 'next/image';
 
-
-
 export function QuestionCard({ title, content, username, profileImg }: QuestionCardProps) {
   const [isImageViewerOpen, setIsImageViewerOpen] = useState(false);
 
@@ -21,9 +19,9 @@ export function QuestionCard({ title, content, username, profileImg }: QuestionC
 
   return (
     <div 
-      className="p-4 sm:p-6  backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-lg w-full animate-slide-up"
+      className="p-4 sm:p-6 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-lg w-full animate-slide-up"
       style={{
-        background: 'white'
+        backgroundColor: 'white'
       }}
     >
       <div className="flex items-center gap-2 mb-4">
@@ -34,6 +32,9 @@ export function QuestionCard({ title, content, username, profileImg }: QuestionC
                 src={profileImg}
                 alt={username}
                 className="rounded-full"
+                width={32}
+                height={32}
+                priority
               />
             ) : (
               <div className="h-8 w-8 rounded-full bg-gray-400 flex items-center justify-center">
@@ -47,13 +48,20 @@ export function QuestionCard({ title, content, username, profileImg }: QuestionC
       <h2 className="text-xl sm:text-2xl font-bold text-black/70 mb-2 sm:mb-3">{title}</h2>
       <p className="text-black/90 text-base sm:text-lg">{content}</p>
       {isImageViewerOpen && profileImg && (
-        <div className="fixed inset-0 bg-black bg-opacity-50" onClick={handleImageViewerClose}>
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50" onClick={handleImageViewerClose}>
           <div className="absolute top-4 right-4">
             <div className="flex items-center justify-center h-8 w-8 rounded-full bg-black bg-opacity-50">
               <X size={24} className="text-white" onClick={handleImageViewerClose} />
             </div>
           </div>
-          <Image src={profileImg} className="w-full h-full object-contain" alt={username} />
+          <Image 
+            src={profileImg} 
+            className="w-full h-full object-contain"
+            alt={username}
+            width={800}
+            height={800}
+            priority
+          />
         </div>
       )}
     </div>
