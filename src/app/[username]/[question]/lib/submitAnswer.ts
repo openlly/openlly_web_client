@@ -1,7 +1,6 @@
 "use server";
 import { AnswerFormData } from "@/app/types";
 import { appConfig } from "@/app/utils/constants";
-import { getDeviceInfo } from "@/app/utils/get_device_info";
 export async function submitAnswer(data: AnswerFormData): Promise<boolean> {
   try {
     //get device info
