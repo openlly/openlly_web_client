@@ -1,7 +1,6 @@
 
 /* eslint-disable */
 import { getQuestionDetails } from './lib/getQuestionDetail';
-import { GradientBackground } from '@/app/components/answerPage/GradientBackground';
 import { AnswerComponent } from '@/app/components/answerPage/AnswerPageLayout';
 import { ErrorState } from '@/app/components/answerPage/QuestionNotFound';
 import { Suspense } from 'react';
@@ -67,19 +66,20 @@ export default async function AnswerPage({ params }: PageProps) {
   const questionData = await getQuestionDetails(username, question); // Assuming this is a function that fetches the data
 
   return (
-    <GradientBackground>
-      <Suspense fallback={<LoadingState />}>
-        {questionData ? (
-          <AnswerComponent
-            questionData={questionData}
-            handleSubmitAnswer={submitAnswer}
-            onRandomSuggestion={onRequestQuestionSuggestion}
-          />
-        ) : (
-          <ErrorState />
-        )}
-      </Suspense>
-    </GradientBackground>
+  
+  <div className="bg-[#0c0c0c] text-white min-h-screen">
+    <Suspense fallback={<LoadingState />}>
+      {questionData ? (
+        <AnswerComponent
+          questionData={questionData}
+          handleSubmitAnswer={submitAnswer}
+          onRandomSuggestion={onRequestQuestionSuggestion}
+        />
+      ) : (
+        <ErrorState />
+      )}
+    </Suspense>
+  </div>
   );
 }
 

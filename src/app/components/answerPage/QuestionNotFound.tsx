@@ -1,24 +1,21 @@
 "use client";
 import { useRouter } from 'next/navigation';
+
 export const ErrorState = () => {
-    const router = useRouter();
-  
-    return (
-      <div className="flex justify-center items-center min-h-screen text-white">
-        <div className="animate-bounce text-center p-4 bg-red-500 rounded-lg shadow-lg">
-          <p className="text-2xl font-bold">Whoops, something went wrong!</p>
-          <p className="text-xl">It does look like link is broken </p>
-          <button
-            className="mt-4 px-4 py-2 bg-white hover:bg-gray-100 rounded text-black transition duration-300 ease-in-out"
-            onClick={() => {
-              // navigate to home
-              router.push('/');
-              
-            }}
-          >
-            Go back
-          </button>
-        </div>
+  const router = useRouter();
+
+  return (
+    <div className="flex justify-center items-center min-h-screen px-4 bg-white dark:bg-black">
+      <div className="text-center p-6 md:p-8 rounded-xl bg-red-500 dark:bg-red-600 text-white shadow-2xl animate-fade-in">
+        <h1 className="text-3xl font-extrabold mb-2">Whoops, something went wrong!</h1>
+        <p className="text-lg mb-4">Looks like this link is broken or no longer exists.</p>
+        <button
+          onClick={() => router.push('/')}
+          className="mt-2 px-6 py-2 bg-white text-red-600 font-medium rounded hover:bg-gray-100 dark:hover:bg-gray-200 transition duration-300"
+        >
+          Go back home
+        </button>
       </div>
-    );
-  };
+    </div>
+  );
+};

@@ -1,27 +1,14 @@
-import Link from 'next/link';
-import { MessageCircle } from 'lucide-react';
+import Link from "next/link";
+import { AppLogo } from "./AppLogo/AppLogo";
 
 export function Navbar() {
   return (
-    <nav className="bg-white border-b">
+    <nav className="bg-[#0f0f0f] border-b border-gray-800 text-white">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <MessageCircle className="w-6 h-6 text-[#ee0979]" />
-            <span className="text-xl font-bold">openlly</span>
-          </Link>
+          <AppLogo isAnimated={true} repeat={false}/>
 
-          <div className="flex items-center gap-6">
-            <Link href="/contact" className="text-gray-600 hover:text-[#ee0979]">
-              Contact
-            </Link>
-            <button 
-              onClick={() => window.open('https://forms.gle/your-google-form-url', '_blank')}
-              className="bg-gradient-to-r from-[#ee0979] to-[#ff6a00] text-white px-4 py-2 rounded-lg hover:opacity-90 transition-opacity"
-            >
-              Get Early Access
-            </button>
-          </div>
+         
         </div>
       </div>
     </nav>

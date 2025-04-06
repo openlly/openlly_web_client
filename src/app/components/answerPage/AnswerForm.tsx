@@ -101,16 +101,17 @@ export function AnswerForm({ questionId, onSubmit, onRandomSuggestion }: AnswerF
 
   return (
     <div className="space-y-4">
-      <form onSubmit={handleSubmit} className="w-full animate-fade-in ">
+      <form onSubmit={handleSubmit} className="w-full animate-fade-in">
         <div className="relative">
           <textarea
             value={answer}
             onChange={(e) => setAnswer(e.target.value)}
             placeholder="Type your anonymous answer..."
-            className="w-full p-3 sm:p-4 pr-24 rounded-xl border border-gray-200 
-              focus:border-[#ee0979] focus:ring-2 focus:ring-[#ee0979]/20 
-              transition-all resize-none text-sm sm:text-base bg-white/80 backdrop-blur-sm
-              h-24 sm:h-32"
+            className="w-full p-3 sm:p-4 pr-24 rounded-xl border border-gray-700 
+focus:border-[#ee0979] focus:ring-2 focus:ring-[#ee0979]/20 
+transition-all resize-none text-sm sm:text-base bg-gray-100 dark:bg-gray-800 
+text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400
+h-24 sm:h-32"
           />
           <div className="absolute right-2 bottom-2 sm:right-3 sm:bottom-3 flex gap-2">
             <button
@@ -146,12 +147,9 @@ export function AnswerForm({ questionId, onSubmit, onRandomSuggestion }: AnswerF
             >
               <Send size={18} className="sm:w-5 sm:h-5" />
             </button>
-           
           </div>
-          
-
         </div>
-        <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 space-y-4 shadow-lg">
+        <div className="bg-gray-800/90 backdrop-blur-sm rounded-xl p-4 space-y-4 shadow-lg border border-gray-700">
           <HintField 
             value={hint}
             onChange={setHint}
@@ -172,7 +170,7 @@ export function AnswerForm({ questionId, onSubmit, onRandomSuggestion }: AnswerF
                 transition-all text-sm
                 ${revealName 
                   ? `bg-gradient-to-br from-[#ee0979] to-[#ff6a00] text-white` 
-                  : `bg-gray-100 text-gray-600 hover:bg-gray-200`
+                  : `bg-gray-700 text-gray-300 hover:bg-gray-600`
                 }`}
             >
               {revealName ? <Eye size={16} /> : <EyeOff size={16} />}
@@ -189,7 +187,6 @@ export function AnswerForm({ questionId, onSubmit, onRandomSuggestion }: AnswerF
             )}
           </div>
         </div>
-       
       </form>
     </div>
   );

@@ -1,3 +1,53 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --background: #FFFFFF;
+  --surface: #F5F5F5;
+  --primary: #000000;
+  --secondary: #666666;
+  --accent: #3700B3;
+  --error: #B00020;
+}
+
+.dark {
+  --background: #121212;
+  --surface: #1E1E1E;
+  --primary: #FFFFFF;
+  --secondary: #A0A0A0;
+  --accent: #3700B3;
+  --error: #CF6679;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-primary;
+  }
+}
+
+@layer utilities {
+  .bg-background {
+    background-color: var(--background);
+  }
+  
+  .bg-surface {
+    background-color: var(--surface);
+  }
+  
+  .text-primary {
+    color: var(--primary);
+  }
+  
+  .text-secondary {
+    color: var(--secondary);
+  }
+  
+  .text-accent {
+    color: var(--accent);
+  }
+  
+  .text-error {
+    color: var(--error);
+  }
+}

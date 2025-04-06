@@ -4,7 +4,7 @@ import { LoadingSpinner } from "../common/LoadingSpinner";
 import { ContactFormProps } from "@/app/types";
 
 interface Props {
-  onSubmit: (data: ContactFormProps) => Promise<boolean>; // Passed from the server
+  onSubmit: (data: ContactFormProps) => Promise<boolean>;
 }
 
 type QueryStatus = "idle" | "loading" | "success" | "error";
@@ -24,7 +24,7 @@ export function ContactForm({ onSubmit }: Props) {
     setErrorMessage("");
 
     try {
-      const result = await onSubmit(formData); // Call the passed `onSubmit`
+      const result = await onSubmit(formData);
       if (result) {
         setStatus("success");
         setFormData({ name: "", email: "", message: "" });
@@ -50,7 +50,7 @@ export function ContactForm({ onSubmit }: Props) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label htmlFor="name" className="block text-sm font-medium mb-1">
+        <label htmlFor="name" className="block text-sm font-medium mb-1 text-white">
           Name
         </label>
         <input
@@ -60,13 +60,14 @@ export function ContactForm({ onSubmit }: Props) {
           onChange={handleChange}
           required
           disabled={status === "loading"}
-          className="w-full px-4 py-2 rounded-lg border-gray-300 focus:ring-[#ee0979] focus:border-[#ee0979]
+          className="w-full px-4 py-2 rounded-lg border border-gray-700 bg-[#1a1a1a] text-white
+            focus:ring-[#ee0979] focus:border-[#ee0979]
             disabled:opacity-50 disabled:cursor-not-allowed"
         />
       </div>
 
       <div>
-        <label htmlFor="email" className="block text-sm font-medium mb-1">
+        <label htmlFor="email" className="block text-sm font-medium mb-1 text-white">
           Email
         </label>
         <input
@@ -76,13 +77,14 @@ export function ContactForm({ onSubmit }: Props) {
           onChange={handleChange}
           required
           disabled={status === "loading"}
-          className="w-full px-4 py-2 rounded-lg border-gray-300 focus:ring-[#ee0979] focus:border-[#ee0979]
+          className="w-full px-4 py-2 rounded-lg border border-gray-700 bg-[#1a1a1a] text-white
+            focus:ring-[#ee0979] focus:border-[#ee0979]
             disabled:opacity-50 disabled:cursor-not-allowed"
         />
       </div>
 
       <div>
-        <label htmlFor="message" className="block text-sm font-medium mb-1">
+        <label htmlFor="message" className="block text-sm font-medium mb-1 text-white">
           Message
         </label>
         <textarea
@@ -92,7 +94,8 @@ export function ContactForm({ onSubmit }: Props) {
           onChange={handleChange}
           required
           disabled={status === "loading"}
-          className="w-full px-4 py-2 rounded-lg border-gray-300 focus:ring-[#ee0979] focus:border-[#ee0979]
+          className="w-full px-4 py-2 rounded-lg border border-gray-700 bg-[#1a1a1a] text-white
+            focus:ring-[#ee0979] focus:border-[#ee0979]
             disabled:opacity-50 disabled:cursor-not-allowed"
         />
       </div>
@@ -115,13 +118,13 @@ export function ContactForm({ onSubmit }: Props) {
       </button>
 
       {status === "success" && (
-        <div className="p-3 rounded-lg bg-green-50 text-green-700 text-sm">
+        <div className="p-3 rounded-lg bg-green-900 text-green-300 text-sm">
           Message sent successfully! We'll get back to you soon.
         </div>
       )}
 
       {status === "error" && (
-        <div className="p-3 rounded-lg bg-red-50 text-red-700 text-sm">
+        <div className="p-3 rounded-lg bg-red-900 text-red-300 text-sm">
           {errorMessage}
         </div>
       )}

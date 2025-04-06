@@ -1,31 +1,31 @@
-import { MessageCircle } from 'lucide-react';
-import Link from 'next/link';
+import Link from "next/link";
+import { AppLogo } from "./AppLogo/AppLogo";
+import { appConfig } from "../utils/constants";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-white border-t">
+    <footer className="bg-[#0f0f0f] border-t border-gray-800 text-white">
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <MessageCircle className="w-6 h-6 text-[#ee0979]" />
-              <span className="text-xl font-bold">openlly</span>
-            </div>
-            <p className="text-gray-600">Share & receive anonymous messages securely.</p>
+            <AppLogo />
+            <p className="text-gray-400">
+              Share & receive anonymous messages securely.
+            </p>
           </div>
 
           <div>
             <h3 className="font-semibold mb-4">Legal</h3>
-            <ul className="space-y-2">
+            <ul className="space-y-2 text-gray-400">
               <li>
-                <Link href="/privacy" className="text-gray-600 hover:text-[#ee0979]">
+                <Link href="/privacy" className="hover:text-[#ee0979]">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-gray-600 hover:text-[#ee0979]">
+                <Link href="/terms" className="hover:text-[#ee0979]">
                   Terms of Service
                 </Link>
               </li>
@@ -34,14 +34,14 @@ export function Footer() {
 
           <div>
             <h3 className="font-semibold mb-4">Company</h3>
-            <ul className="space-y-2">
+            <ul className="space-y-2 text-gray-400">
               <li>
-                <Link href="/about" className="text-gray-600 hover:text-[#ee0979]">
+                <Link href="/about" className="hover:text-[#ee0979]">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-600 hover:text-[#ee0979]">
+                <Link href="/contact" className="hover:text-[#ee0979]">
                   Contact
                 </Link>
               </li>
@@ -50,23 +50,23 @@ export function Footer() {
 
           <div>
             <h3 className="font-semibold mb-4">Connect</h3>
-            <ul className="space-y-2">
+            <ul className="space-y-2 text-gray-400">
               <li>
-                <a 
-                  href="https://twitter.com/openlly" 
-                  target="_blank" 
+                <a
+                  href={appConfig.TWITTER_URL}
+                  target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-600 hover:text-[#ee0979]"
+                  className="hover:text-[#ee0979]"
                 >
                   Twitter
                 </a>
               </li>
               <li>
-                <a 
-                  href="https://instagram.com/openlly" 
-                  target="_blank" 
+                <a
+                  href={appConfig.INSTAGRAM_URL}
+                  target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-600 hover:text-[#ee0979]"
+                  className="hover:text-[#ee0979]"
                 >
                   Instagram
                 </a>
@@ -75,7 +75,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t mt-8 pt-8 text-center text-gray-600">
+        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
           <p>© {currentYear} Openlly. All rights reserved.</p>
         </div>
       </div>

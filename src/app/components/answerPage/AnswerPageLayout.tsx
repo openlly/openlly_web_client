@@ -7,6 +7,10 @@ import { QuestionCard } from "./QuestionCard";
 import { AnswerFormData, QuestionData } from "@/app/types";
 import { useToast } from "@/app/hooks/useToast";
 import { Toast } from "../Toast";
+import { AppLogo } from "../AppLogo/AppLogo";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+
 
 interface AnswerComponentProps {
   questionData: QuestionData;
@@ -14,25 +18,31 @@ interface AnswerComponentProps {
   handleSubmitAnswer: (data: AnswerFormData) => Promise<boolean>;
 }
 
-export function AnswerComponent({ questionData, handleSubmitAnswer,onRandomSuggestion }: AnswerComponentProps) {
+export function AnswerComponent({
+  questionData,
+  handleSubmitAnswer,
+  onRandomSuggestion,
+}: AnswerComponentProps) {
   const { toast, showToast, hideToast } = useToast();
 
-  // Validation helper function
-  const validateFormData = (data: { answer: string; hint?: string; revealName: boolean; name?: string; revealTime?: string; email?: string; wantAcknowledgment?: boolean }) => {
+  const validateFormData = (data: {
+    answer: string;
+    hint?: string;
+    revealName: boolean;
+    name?: string;
+    revealTime?: string;
+    email?: string;
+    wantAcknowledgment?: boolean;
+  }) => {
     const errors: string[] = [];
 
-    if (!data.answer?.trim()) {
-      errors.push("Content is required.");
-    }
-
+    if (!data.answer?.trim()) errors.push("Content is required.");
     if (data.wantAcknowledgment && (!data.email || !/\S+@\S+\.\S+/.test(data.email))) {
       errors.push("A valid email is required for acknowledgment.");
     }
-
     if (data.revealName && !data.name?.trim()) {
       errors.push("Name is required if you want to reveal your identity.");
     }
-
     if (data.revealName && !data.revealTime?.trim()) {
       errors.push("Reveal time is required if you want to reveal your identity.");
     }
@@ -40,7 +50,6 @@ export function AnswerComponent({ questionData, handleSubmitAnswer,onRandomSugge
     return errors;
   };
 
-  // Handle form submission
   const handleSubmit = useCallback(
     async (data: {
       answer: string;
@@ -56,31 +65,18 @@ export function AnswerComponent({ questionData, handleSubmitAnswer,onRandomSugge
         showToast(validationErrors.join(" "), "error");
         return;
       }
-      // Ensure the object has the correct structure, using type assertions
-      const formData: {
-        answer: string;
-        hint?: string;
-        revealName: boolean;
-        name?: string;
-        revealTime?: string;
-        email?: string;
-        wantAcknowledgment?: boolean;
-        questionId: string;
-        answerTo: string;
-      } = {
+
+      const formData = {
         answer: data.answer,
         revealName: data.revealName,
         hint: data.hint,
         questionId: questionData.id,
         answerTo: questionData.user.id,
+        name: data.name,
+        revealTime: data.revealTime,
+        email: data.email,
       };
-      if (data.hint) formData.hint = data.hint;
-      if (data.wantAcknowledgment && data.email) formData.email = data.email;
-      if (data.revealName && data.name && data.revealTime) {
-        formData.name = data.name;
-        formData.revealTime = data.revealTime;
-      }
-      // Pass the correctly shaped object to handleSubmitAnswer
+
       const success = await handleSubmitAnswer({
         content: formData.answer,
         hint: formData.hint,
@@ -90,6 +86,7 @@ export function AnswerComponent({ questionData, handleSubmitAnswer,onRandomSugge
         questionId: formData.questionId,
         answerTo: formData.answerTo,
       });
+
       if (success) {
         showToast("Your message has been submitted successfully.", "success");
       } else {
@@ -108,20 +105,41 @@ export function AnswerComponent({ questionData, handleSubmitAnswer,onRandomSugge
   }
 
   return (
-    <div className="container mx-auto px-4 py-6 sm:py-8">
-      <EarlyAccessBanner />
-      <div className="max-w-xl mx-auto space-y-6 sm:space-y-8">
+    <div className="px-4 py-6 sm:py-10 max-w-screen-md mx-auto text-white">
+    {/* 🧭 Header Navbar */}
+       <header className="sticky top-0 z-30 bg-black/70 backdrop-blur-md px-4 py-3 mb-6 rounded-lg flex items-center justify-between border border-white/10 shadow-md">
+        <Link href="/" className="flex items-center gap-2 text-white hover:underline">
+          <ArrowLeft size={18} />
+          <span className="text-sm font-medium">Back</span>
+        </Link>
+        
+      </header>
+
+      <div className="space-y-6 sm:space-y-8">
         <QuestionCard
           title={questionData.title}
           content={questionData.content}
           username={questionData.user.username}
-          profileImg={questionData.user.profileImg??""}
+          profileImg={questionData.user.profileImg ?? ""}
         />
+
         <Suspense fallback={<div>Loading form...</div>}>
-          <AnswerForm onSubmit={handleSubmit} questionId={questionData.id} onRandomSuggestion={onRandomSuggestion} />
+          <AnswerForm
+            onSubmit={handleSubmit}
+            questionId={questionData.id}
+            onRandomSuggestion={onRandomSuggestion}
+          />
         </Suspense>
       </div>
-      {toast.isVisible && <Toast message={toast.message} type={toast.type} onClose={hideToast} />}
+
+      {toast.isVisible && (
+        <Toast message={toast.message} type={toast.type} onClose={hideToast} />
+      )}
+
+<footer className="mt-10 space-y-4 flex flex-col items-center justify-center">
+  <EarlyAccessBanner />
+  <AppLogo size="small" />
+</footer>
     </div>
   );
 }

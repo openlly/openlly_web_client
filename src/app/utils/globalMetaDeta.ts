@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { appConfig } from "../../app/utils/constants";
 
 export const globalMetaData: Metadata = {
     title: "Openlly - Open yourself",
@@ -9,7 +10,7 @@ export const globalMetaData: Metadata = {
     openGraph: {
       title: "Openlly - Ask Questions Anonymously",
       description: "Openlly lets you post questions to your social media story and receive anonymous answers from your followers.",
-      url: "https://openlly.netlify.app/",
+      url: appConfig.CLIENT_BASE_URL,
       type: "website",
       images: [
         {

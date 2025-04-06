@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Baumans&display=swap');
+
+.logoContainer {
+  display: inline-block;
+}
+
+.animatedLogo,
+.staticLogo {
+  font-family: 'Baumans', sans-serif;
+  font-weight: bold;
+  color: white;
+  background-clip: text;
+  -webkit-background-clip: text;
+  transition: transform 0.3s ease;
+}
+
+.animatedLogo {
+  color: transparent;
+  animation: shimmer 2s infinite;
+}
+
+.staticLogo:hover {
+  transform: scale(1.05);
+}
+
+@keyframes shimmer {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+} 
