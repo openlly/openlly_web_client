@@ -1,5 +1,4 @@
 
-/* eslint-disable */
 import { getQuestionDetails } from './lib/getQuestionDetail';
 import { AnswerComponent } from '@/app/components/answerPage/AnswerPageLayout';
 import { ErrorState } from '@/app/components/answerPage/QuestionNotFound';

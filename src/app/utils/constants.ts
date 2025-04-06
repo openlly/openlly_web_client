@@ -11,6 +11,8 @@ export const appConfig= {
   CONTACT_ADDRESS : process.env.CONTACT_ADDRESS || "",
   TWITTER_URL: process.env.TWITTER_URL || '',
   INSTAGRAM_URL: process.env.INSTAGRAM_URL || '', 
+  ANDROID_DOWNLOAD_LINK: process.env.ANDROID_DOWNLOAD_LINK || '',
+  IOS_DOWNLOAD_LINK: process.env.IOS_DOWNLOAD_LINK || '',
 };
 
 

@@ -1,6 +1,6 @@
 "use client";
 import { QuestionCardProps } from '@/app/types';
-import { User, X } from 'lucide-react';
+import { User } from 'lucide-react';
 import Image from 'next/image';
 
 export function QuestionCard({ title, content, username, profileImg }: QuestionCardProps) {

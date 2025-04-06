@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
   
   try {
     // Check if body is JSON and parse it
-    var body = await request.json();
+    const body = await request.json();
     //remove empty fields from body
     Object.keys(body).forEach(key => {
       if (body[key] === null || body[key] === undefined || body[key] === "") {

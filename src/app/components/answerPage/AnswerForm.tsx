@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useRef } from 'react';
-import { Eye, EyeOff,Send, Dice1, Dice2, Dice3, Dice4, Dice5, Dice6 } from 'lucide-react';
+import { Send, Dice1, Dice2, Dice3, Dice4, Dice5, Dice6 } from 'lucide-react';
 import { useDebouncer } from '../../hooks/useDebouncer';
 import { gradientClasses } from '../../utils/styles';
 import { HintField } from './HintTextField';

@@ -13,6 +13,7 @@ import { FeatureCard } from "../../components/home/FeatureCard";
 import background from "../../../../public/background.webp";
 import { GooglePlayButton } from "react-mobile-app-button";
 import { AppStoreButton } from "react-mobile-app-button";
+import { appConfig } from "../../utils/constants";
 
 export default function Home() {
   return (
@@ -32,10 +33,10 @@ export default function Home() {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <div className="opacity-70 flex flex-col items-start">
-                <GooglePlayButton url={""} theme="dark" />
+                <GooglePlayButton url={appConfig.ANDROID_DOWNLOAD_LINK} theme="dark" />
               </div>
               <div className="opacity-70 flex flex-col items-start">
-                  <AppStoreButton url={""} theme="dark" />
+                  <AppStoreButton url={appConfig.IOS_DOWNLOAD_LINK} theme="dark" />
               </div>
             </div>
           </div>
@@ -93,11 +94,11 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <div className="opacity-70">
-                <GooglePlayButton url={""} theme="dark" />
+                <GooglePlayButton url={appConfig.ANDROID_DOWNLOAD_LINK} theme="dark" />
                 <span className="text-sm text-white/80 ml-1">Coming soon</span>
               </div>
               <div className="opacity-70">
-                <AppStoreButton url={""} theme="dark" />
+                  <AppStoreButton url={appConfig.IOS_DOWNLOAD_LINK} theme="dark" />
                 <span className="text-sm text-white/80 ml-1">Coming soon</span>
               </div>
             </div>

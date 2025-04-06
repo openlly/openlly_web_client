@@ -1,6 +1,5 @@
-
-
 import React from 'react';
+import Image from 'next/image';
 import { QuestionData } from '@/app/types';
 import { appConfig } from '@/app/utils/constants';
 
@@ -78,11 +77,12 @@ const EnhancedBrandedCTASection: React.FC<{ questionData?: QuestionData }> = ({ 
           </p>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-              <div style={{ width: '64px', height: '64px', borderRadius: '50%', overflow: 'hidden', display: 'flex' }}>
-                <img 
+              <div style={{ width: '64px', height: '64px', borderRadius: '50%', overflow: 'hidden', display: 'flex', position: 'relative' }}>
+                <Image 
                   src={defaultQuestionData.user.profileImg || ""} 
-                  alt="Profile" 
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  alt="Profile"
+                  fill
+                  style={{ objectFit: 'cover' }}
                 />
               </div>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -125,4 +125,3 @@ const EnhancedBrandedCTASection: React.FC<{ questionData?: QuestionData }> = ({ 
 };
 
 export default EnhancedBrandedCTASection;
-

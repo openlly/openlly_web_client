@@ -1,4 +1,3 @@
-/* eslint-disable */
 export interface QuestionData {
     id: string;
     title: string;

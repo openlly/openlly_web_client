@@ -1,5 +1,6 @@
 "use client";
 
+import { appConfig } from "@/app/utils/constants";
 import { ChevronRight, Sparkles } from "lucide-react";
 import { GooglePlayButton, AppStoreButton } from "react-mobile-app-button";
 
@@ -28,12 +29,12 @@ export function EarlyAccessBanner() {
         {/* Store buttons */}
         <div className="flex flex-wrap justify-center gap-2">
           <GooglePlayButton
-            url={''}
+            url={appConfig.ANDROID_DOWNLOAD_LINK}
             theme="dark"
             className="scale-[0.85] sm:scale-100 hover:scale-105 transition-transform"
           />
           <AppStoreButton
-            url={''}
+            url={appConfig.IOS_DOWNLOAD_LINK}
             theme="dark"
             className="scale-[0.85] sm:scale-100 hover:scale-105 transition-transform"
           />
