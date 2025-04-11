@@ -106,14 +106,7 @@ export function AnswerComponent({
 
   return (
     <div className="px-4 py-6 sm:py-10 max-w-screen-md mx-auto text-white">
-    {/* 🧭 Header Navbar */}
-       <header className="sticky top-0 z-30 bg-black/70 backdrop-blur-md px-4 py-3 mb-6 rounded-lg flex items-center justify-between border border-white/10 shadow-md">
-        <Link href="/" className="flex items-center gap-2 text-white hover:underline">
-          <ArrowLeft size={18} />
-          <span className="text-sm font-medium">Back</span>
-        </Link>
-        
-      </header>
+   
 
       <div className="space-y-6 sm:space-y-8">
         <QuestionCard
@@ -138,7 +131,6 @@ export function AnswerComponent({
 
 <footer className="mt-10 space-y-4 flex flex-col items-center justify-center">
   <EarlyAccessBanner />
-  <AppLogo size="small" />
 </footer>
     </div>
   );
