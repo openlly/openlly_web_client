@@ -11,9 +11,9 @@ import Image from "next/image";
 import { Layout } from "../../components/Layout";
 import { FeatureCard } from "../../components/home/FeatureCard";
 import background from "../../../../public/background.webp";
-import { GooglePlayButton } from "react-mobile-app-button";
-import { AppStoreButton } from "react-mobile-app-button";
 import { appConfig } from "../../utils/constants";
+import GooglePlayButton from "../../components/StoreButton/GooglePlayStoreButton";
+import AppStoreButton from "../../components/StoreButton/AppStoreButton";
 
 export default function Home() {
   return (

@@ -2,7 +2,8 @@
 
 import { appConfig } from "@/app/utils/constants";
 import { ChevronRight, Sparkles } from "lucide-react";
-import { GooglePlayButton, AppStoreButton } from "react-mobile-app-button";
+import GooglePlayButton from "../StoreButton/GooglePlayStoreButton";
+import AppStoreButton from "../StoreButton/AppStoreButton";
 
 export function EarlyAccessBanner() {
   return (
