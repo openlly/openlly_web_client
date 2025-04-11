@@ -7,9 +7,6 @@ import { QuestionCard } from "./QuestionCard";
 import { AnswerFormData, QuestionData } from "@/app/types";
 import { useToast } from "@/app/hooks/useToast";
 import { Toast } from "../Toast";
-import { AppLogo } from "../AppLogo/AppLogo";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 
 
 interface AnswerComponentProps {

@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { AppLogo } from './AppLogo/AppLogo';
 //props
 interface NavbarProps {
@@ -10,12 +9,11 @@ interface NavbarProps {
 }
 
 export function Navbar({ isHomePage = false }: NavbarProps) {
-  
-
   return (
     <nav
       className={`${
-        isHomePage ? 'bg-transparent absolute top-0 left-0 w-full z-30' : 'bg-[#0f0f0f] border-b border-gray-800'
+      //   'bg-black/10 backdrop-blur-lg border-t border-white/10 text-white
+        isHomePage ? 'bg-transparent border-t border-white/10 text-white' : 'bg-[#0f0f0f] border-b border-gray-800'
       } text-white transition-colors duration-300`}
     >
       <div className="container mx-auto px-4 py-4">

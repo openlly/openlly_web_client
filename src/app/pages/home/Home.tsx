@@ -13,16 +13,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image1 from "@/assets/HomePage/image_1.jpg";
 import Image2 from "@/assets/HomePage/image_2.jpg";
 import Image3 from "@/assets/HomePage/image_3.jpg";
-const snapEffect = {
-  initial: { opacity: 0, scale: 0.9, clipPath: 'inset(0% 0% 0% 0%)' },
-  animate: { opacity: 1, scale: 1, clipPath: 'inset(0% 0% 0% 0%)' },
-  exit: {
-    opacity: 0,
-    scale: 0.7,
-    clipPath: 'inset(50% 30% 50% 30%)',
-    transition: { duration: 0.4, ease: 'easeIn' },
-  },
-};
 
 const features = [
   {
@@ -69,11 +59,9 @@ const sections = [
 ];
 
 export default function Home() {
-  const [mounted, setMounted] = useState(false);
   const [activeSection, setActiveSection] = useState(0);
 
   useEffect(() => {
-    setMounted(true);
     const timer = setInterval(() => {
       setActiveSection((prev) => (prev + 1) % sections.length);
     }, 5000);
