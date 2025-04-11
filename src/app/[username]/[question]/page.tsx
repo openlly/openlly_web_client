@@ -1,3 +1,4 @@
+
 import { getQuestionDetails } from './lib/getQuestionDetail';
 import { AnswerComponent } from '@/app/components/answerPage/AnswerPageLayout';
 import { ErrorState } from '@/app/components/answerPage/QuestionNotFound';
@@ -9,18 +10,17 @@ import { globalMetaData } from '@/app/utils/globalMetaDeta';
 import { Layout } from '@/app/components/Layout';
 
 interface PageProps {
-  params: {
+  params: Promise<{
     username: string;
     question: string;
-  };
+  }>;
 }
-
 export async function generateMetadata({ params }: PageProps) {
-  const { username, question } = params;
+  const { username, question } = await params;
   const questionData = await getQuestionDetails(username, question);
 
   if (!questionData) {
-    return globalMetaData;
+    return globalMetaData; // Use global metadata when questionData is unavailable
   }
 
   const title = `${questionData.title ?? "NA"} - Ask by @${questionData.user.username ?? "NA"} | Openlly`;
@@ -59,33 +59,34 @@ export async function generateMetadata({ params }: PageProps) {
   };
 }
 
-const LoadingState = () => (
-  <div className="flex justify-center items-center min-h-screen bg-[#0c0c0c] text-white">
-    <div
-      role="status"
-      className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"
-    />
-    <span className="sr-only">Loading...</span>
-  </div>
-);
+
 
 export default async function AnswerPage({ params }: PageProps) {
-  const { username, question } = params;
-  const questionData = await getQuestionDetails(username, question);
+  const { username, question } = await params;
+  const questionData = await getQuestionDetails(username, question); // Assuming this is a function that fetches the data
 
   return (
-    <Layout>
-      <Suspense fallback={<LoadingState />}>
-        {questionData ? (
-          <AnswerComponent
-            questionData={questionData}
-            handleSubmitAnswer={submitAnswer}
-            onRandomSuggestion={onRequestQuestionSuggestion}
-          />
-        ) : (
-          <ErrorState />
-        )}
-      </Suspense>
+  
+  <Layout>
+    <Suspense fallback={<LoadingState />}>
+      {questionData ? (
+        <AnswerComponent
+          questionData={questionData}
+          handleSubmitAnswer={submitAnswer}
+          onRandomSuggestion={onRequestQuestionSuggestion}
+        />
+      ) : (
+        <ErrorState />
+      )}
+    </Suspense>
     </Layout>
   );
 }
+
+const LoadingState = () => {
+  return (
+    <div className="flex justify-center items-center min-h-screen text-white">
+      <div className="spinner-border animate-spin inline-block w-24 h-24 border-4 rounded-full border-t-transparent border-solid" />
+    </div>
+  );
+};

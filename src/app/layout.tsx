@@ -7,7 +7,7 @@ import { globalMetaData } from './utils/globalMetaDeta';
 export const metadata: Metadata = globalMetaData;
 
 export default function RootLayout({
-  children,
+children,
 }: {
   children: React.ReactNode;
 }) {

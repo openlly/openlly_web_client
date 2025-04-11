@@ -2,11 +2,21 @@ import Link from 'next/link';
 import { AppLogo } from './AppLogo/AppLogo';
 import { appConfig } from '../utils/constants';
 
-export function Footer() {
+interface FooterProps {
+  isHomePage?: boolean;
+}
+
+export function Footer({ isHomePage = false }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#0f0f0f] border-t border-gray-800 text-white">
+    <footer
+      className={
+        isHomePage
+          ? 'bg-black/10 backdrop-blur-lg border-t border-white/10 text-white'
+          : 'bg-[#0f0f0f] border-t border-gray-800 text-white'
+      }
+    >
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           <div>
@@ -44,10 +54,24 @@ export function Footer() {
             <h3 className="font-semibold mb-4 text-sm uppercase tracking-wide">Connect</h3>
             <ul className="space-y-2 text-gray-400 text-sm">
               <li>
-                <a href={appConfig.TWITTER_URL} target="_blank" rel="noopener noreferrer" className="hover:text-[#ee0979]">Twitter</a>
+                <a
+                  href={appConfig.TWITTER_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#ee0979]"
+                >
+                  Twitter
+                </a>
               </li>
               <li>
-                <a href={appConfig.INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="hover:text-[#ee0979]">Instagram</a>
+                <a
+                  href={appConfig.INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#ee0979]"
+                >
+                  Instagram
+                </a>
               </li>
             </ul>
           </div>
