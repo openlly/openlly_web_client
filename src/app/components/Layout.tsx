@@ -14,7 +14,7 @@ export function Layout({ children, isHomePage = false }: LayoutProps) {
       }`}
     >
       <Navbar isHomePage={isHomePage} />
-      <main className="flex-grow">{children}</main>
+      <main className="flex-grow pt-[72px]">{children}</main>
       <Footer isHomePage={isHomePage} />
     </div>
   );
