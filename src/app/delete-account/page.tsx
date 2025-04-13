@@ -1,7 +1,6 @@
 "use client";
 
 import { Layout } from "@/app/components/Layout";
-import { appConfig } from "@/app/utils/constants";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
