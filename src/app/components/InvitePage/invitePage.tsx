@@ -51,7 +51,7 @@ export default function InvitePageComponent({ initialSentInvites = 0, onInvite, 
                 const message = await onInvite?.(email);
                 if(message?.status === 'success'){
                     setEmail('');
-                    setSuccessMessage(message.message);
+                    setSuccessMessage("Thanks for your interest! We'll email you when you get access.");
                 }else{
                     setError(message?.message || 'Failed to send invite. Please try again.');
                 }

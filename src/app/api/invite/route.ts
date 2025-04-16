@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import sheets from './lib/google_auth';
 
-export async function POST(request: NextRequest, response: NextResponse) {
+export async function POST(request: NextRequest) {
     //check if email in body is already in the sheet
     const body = await request.json();
     const email = body.email;
@@ -41,7 +41,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
     return NextResponse.json({ message: 'Email added to sheet' }, { status: 200 });
 
 }
-export async function GET(request: NextRequest, response: NextResponse) {
+export async function GET() {
     // Set cache control headers for 5 minutes
     const headers = {
         'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=300'
